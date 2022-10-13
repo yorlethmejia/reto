@@ -33,7 +33,7 @@ public class ToolService {
                 return toolRepository.save(tool);
             } else {
                 Optional<Tool> tool1 = toolRepository.getTool(tool.getId());
-                if (tool1.isEmpty()) {
+                if (!tool1.isPresent()) {
                     return toolRepository.save(tool);
                 } else {
                     return tool;
@@ -51,7 +51,7 @@ public class ToolService {
     public Tool update(Tool tool){
         if(tool.getId()!=null){
             Optional<Tool> e= toolRepository.getTool(tool.getId());
-            if(!e.isEmpty()){
+            if(e.isPresent()){
                 if(tool.getName()!=null){
                     e.get().setName(tool.getName());
                 }

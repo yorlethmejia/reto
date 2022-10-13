@@ -33,7 +33,7 @@ public class ClientService {
                 return clientRepository.save(client);
             } else {
                 Optional<Client> client1 = clientRepository.getClient(client.getIdClient());
-                if (client1.isEmpty()) {
+                if (client1.isPresent()) {
                     return clientRepository.save(client);
                 } else {
                     return client;
@@ -54,7 +54,7 @@ public class ClientService {
     public Client update(Client client){
         if(client.getIdClient()!=null){
             Optional<Client> e= clientRepository.getClient(client.getIdClient());
-            if(!e.isEmpty()){
+            if(e.isPresent()){
                 if(client.getName()!=null){
                     e.get().setName(client.getName());
                 }

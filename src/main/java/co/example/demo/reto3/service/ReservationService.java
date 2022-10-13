@@ -30,7 +30,7 @@ public class ReservationService {
             return reservationRepository.save(reservation);
         } else {
             Optional<Reservation> reservation1 = reservationRepository.getReservation(reservation.getIdReservation());
-            if(reservation1.isEmpty()){
+            if(reservation1.isPresent()){
                 return reservationRepository.save(reservation);
             } else {
                 return reservation;
@@ -41,7 +41,7 @@ public class ReservationService {
     public Reservation update(Reservation reservation){
         if(reservation.getIdReservation()!=null){
             Optional<Reservation> e= reservationRepository.getReservation(reservation.getIdReservation());
-            if(!e.isEmpty()){
+            if(e.isPresent()){
 
                 if(reservation.getStartDate()!=null){
                     e.get().setStartDate(reservation.getStartDate());
