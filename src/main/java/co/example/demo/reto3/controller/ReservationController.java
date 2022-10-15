@@ -24,6 +24,7 @@ import org.springframework.http.HttpStatus;
 
 @RestController
 @RequestMapping("/api/Reservation")
+@CrossOrigin(origins = "*", methods={RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT})
 
 public class ReservationController {
     @Autowired
@@ -57,7 +58,7 @@ public class ReservationController {
         return reservationService.deleteReservation(id);
     }
 
-    @GetMapping("/report-client")
+    @GetMapping("/report-clients")
     public List<CountClient> getReservationsReportClient(){
         return reservationService.getReportClient();
     }
