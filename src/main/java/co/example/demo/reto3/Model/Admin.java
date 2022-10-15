@@ -11,9 +11,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "admin")
-
-
-
 public class Admin implements Serializable {
 
     @Id
