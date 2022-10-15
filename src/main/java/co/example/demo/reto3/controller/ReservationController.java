@@ -6,8 +6,14 @@ import co.example.demo.reto3.Model.StatusAmount;
 import co.example.demo.reto3.service.ReservationService;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
@@ -51,19 +57,29 @@ public class ReservationController {
         return reservationService.deleteReservation(id);
     }
 
-    @GetMapping("/report-clients")
+    @GetMapping("/report-client")
     public List<CountClient> getReservationsReportClient(){
-        return reservationService.getTopClients();
+        return reservationService.getReportClient();
     }
 
     @GetMapping("/report-dates/{dateOne}/{dateTwo}")
     public List<Reservation> getReservationsReportDates(@PathVariable("dateOne") String dateOne,@PathVariable("dateTwo") String dateTwo){
-        return reservationService.getReservationsPeriod(dateOne,dateTwo);
+        Date date1= new Date();
+        Date date2= new Date();
+        try {
+            date1 = new SimpleDateFormat("yyyy-MM-dd").parse(dateOne);
+            date2=new SimpleDateFormat("yyyy-MM-dd").parse(dateTwo);
+        } catch (ParseException ex) {
+            Logger.getLogger(ReservationController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return reservationService.getReportDates(date1,date2);
+
+
     }
 
     @GetMapping("/report-status")
     public StatusAmount getReservationsStatusReport(){
-        return reservationService.getReservationsStatusReport();
+        return reservationService.getStatus();
 
     }
 }

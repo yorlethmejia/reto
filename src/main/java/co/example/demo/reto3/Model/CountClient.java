@@ -8,6 +8,9 @@ public class CountClient {
         this.total = total;
         this.client = client;
     }
+    public CountClient() {
+
+    }
 
     public Long getTotal() {
         return total;

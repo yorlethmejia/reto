@@ -8,6 +8,9 @@ public class StatusAmount {
         this.completed = completed;
         this.cancelled = cancelled;
     }
+    public StatusAmount() {
+
+    }
 
     public int getCompleted() {
         return completed;
